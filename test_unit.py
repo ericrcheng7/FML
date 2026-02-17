@@ -58,11 +58,15 @@ def test_price_cleaning():
     # Check that prices are numeric
     assert df_clean['price'].dtype in [np.float64, np.int64], "Price should be numeric"
     
-    # Check that invalid prices are removed
+    # Check that invalid prices are removed (including negative)
     assert all(df_clean['price'] > 0), "All prices should be positive"
+    assert len(df_clean[df_clean['price'] < 0]) == 0, "No negative prices should remain"
+    
+    # Verify that the negative price ($-500) was filtered out
+    assert -500.0 not in df_clean['price'].values, "Negative price should be filtered out"
     
     print(f"After cleaning: {df_clean['price'].tolist()}")
-    print("✓ Price cleaning test passed")
+    print("✓ Price cleaning test passed (including negative price filtering)")
     
     return df_clean
 

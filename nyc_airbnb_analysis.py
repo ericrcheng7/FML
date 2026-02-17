@@ -66,7 +66,7 @@ def clean_data(df):
     print(f"Removed {duplicates_removed} duplicate listings")
     
     # 3. Select useful room features to keep
-    # Keep relevant columns for analysis and embedding generation
+    # Keep relevant columns for analysis and embedding generation (30 columns)
     useful_columns = [
         'id',
         'name',
