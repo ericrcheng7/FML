@@ -42,6 +42,16 @@ jupyter notebook nyc_airbnb_analysis.ipynb
 
 The notebook provides an interactive environment with visualizations and step-by-step analysis.
 
+### Testing
+
+Run the unit tests to verify the data cleaning functionality:
+
+```bash
+python test_unit.py
+```
+
+This tests the core data cleaning logic with mock data.
+
 ### Output
 
 The processed data is saved as a Parquet file containing:
@@ -57,6 +67,27 @@ The embeddings are generated using the approach learned in [lab3_embeddings_retr
 3. Prefix text with "search_document:" for optimal encoding
 4. Generate normalized embeddings (L2 norm = 1)
 5. Store embeddings alongside listing data
+
+### Data Cleaning Details
+
+The cleaning process includes:
+
+1. **Price Column Cleaning**:
+   - Removes "$" symbols and commas
+   - Converts to numeric type
+   - Handles conversion errors gracefully
+
+2. **Duplicate Removal**:
+   - Identifies and removes duplicate listings by ID
+
+3. **Feature Selection**:
+   - Keeps only useful columns for analysis
+   - Includes: id, name, description, location, property type, room type, amenities, price, reviews, etc.
+
+4. **Data Quality Filters**:
+   - Removes listings without name or price
+   - Removes listings with invalid prices (≤ $0)
+   - Removes extreme outliers (> $10,000/night)
 
 ### Use Cases
 
